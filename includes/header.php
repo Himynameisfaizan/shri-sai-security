@@ -35,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.php">
-                <i class="fas fa-shield-alt text-primary-custom fs-1 me-2"></i>
+               <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
                 <div>
                     <span class="d-block fs-4 text-dark">Sri Sai</span>
                     <span class="d-block fs-6 text-muted fw-normal">Security Services</span>

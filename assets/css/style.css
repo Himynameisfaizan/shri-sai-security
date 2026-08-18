@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
+    /* Updated Colors matching the Logo */
     --primary-color: #ffb606;
-    --secondary-color: #0b1528;
+    /* Golden Yellow from Stars/Text */
+    --secondary-color: #0a1c3a;
+    /* Deep Navy Blue from Inner Circle */
+    --accent-teal: #008a6e;
+    /* Teal Green from Outer Ring */
     --text-dark: #333;
     --text-light: #fff;
     --font-family: 'Poppins', sans-serif;
@@ -15,9 +20,17 @@ body {
 }
 
 /* Typography & Colors */
-.text-primary-custom { color: var(--primary-color); }
-.bg-dark-blue { background-color: var(--secondary-color); }
-.bg-light-gray { background-color: #f4f6f9; }
+.text-primary-custom {
+    color: var(--primary-color);
+}
+
+.bg-dark-blue {
+    background-color: var(--secondary-color);
+}
+
+.bg-light-gray {
+    background-color: #f4f6f9;
+}
 
 /* Buttons */
 .btn-primary-custom {
@@ -51,14 +64,29 @@ body {
 }
 
 /* Header & Navbar */
-.top-bar { font-size: 14px; }
-.navbar-brand { font-weight: 700; line-height: 1.2; }
-.nav-link { font-weight: 600; color: var(--secondary-color) !important; margin: 0 10px; transition: 0.3s; }
-.nav-link:hover { color: var(--primary-color) !important; }
+.top-bar {
+    font-size: 14px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--secondary-color) !important;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
 
 /* Hero Section (Fixed Background) */
 .hero-section {
-    background: linear-gradient(rgba(11, 21, 40, 0.85), rgba(11, 21, 40, 0.85)), url('https://plus.unsplash.com/premium_photo-1682125945563-8ce7517b8d17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2VjdXJpdHklMjBndWFyZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
+    background: linear-gradient(rgba(11, 21, 40, 0.322), rgba(11, 21, 40, 0.363)), url('https://plus.unsplash.com/premium_photo-1682125945563-8ce7517b8d17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2VjdXJpdHklMjBndWFyZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
     background-size: cover;
     height: 85vh;
     display: flex;
@@ -72,16 +100,26 @@ body {
 }
 
 /* Sections */
-.section-padding { padding: 80px 0; }
-.section-title { font-weight: 700; margin-bottom: 40px; color: var(--secondary-color); }
-.section-title span { color: var(--primary-color); }
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+}
+
+.section-title span {
+    color: var(--primary-color);
+}
 
 /* Service Cards */
 .service-card {
     background: #fff;
     padding: 40px 25px;
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
     transition: all 0.3s ease;
     height: 100%;
     border-bottom: 4px solid transparent;
@@ -90,7 +128,7 @@ body {
 .service-card:hover {
     transform: translateY(-10px);
     border-bottom: 4px solid var(--primary-color);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .service-icon {
@@ -103,38 +141,46 @@ body {
 .quote-card {
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
+
 .quote-card .form-control {
     background: #f8f9fa;
     border: 1px solid #e9ecef;
     color: #333;
 }
+
 .quote-card .form-control:focus {
     border-color: var(--primary-color);
     background: #fff;
     box-shadow: none;
 }
-.quote-card .form-control::placeholder { color: #888; }
+
+.quote-card .form-control::placeholder {
+    color: #888;
+}
 
 /* Blog Section */
 .blog-card {
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     height: 100%;
 }
+
 .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
+
 .blog-image {
     width: 100%;
     height: 220px;
     object-fit: cover;
 }
+
 .blog-content {
     padding: 25px;
 }
@@ -145,6 +191,139 @@ body {
     color: #ccc;
     padding-top: 60px;
 }
-.footer h5 { color: #fff; font-weight: 600; margin-bottom: 25px; }
-.footer-link { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
-.footer-link:hover { color: var(--primary-color); padding-left: 5px; }
+
+.footer h5 {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.footer-link {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+/* ============================== */
+/* SERVIC SECTION STYLING */
+/* ============================== */
+
+.service-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    height: 100%;
+    overflow: hidden; /* Ensure image fits well inside rounded corners */
+    border-bottom: 4px solid transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-bottom: 4px solid var(--primary-color);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.service-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.service-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-icon-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.service-icon {
+    font-size: 28px;
+    color: var(--secondary-color);
+    background-color: rgba(255, 182, 6, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.service-title {
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.service-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.read-more-link {
+    color: var(--accent-teal);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.read-more-link:hover {
+    color: var(--secondary-color);
+    letter-spacing: 0.5px;
+}
+
+.whatsapp-btn {
+    color: #25D366; /* Official WhatsApp Color */
+    font-size: 1.8rem;
+    transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+    color: #128C7E;
+    transform: scale(1.1);
+}   
+
+/* GALLERY SECTION STYLING */
+
+/* ====== Gallery Section Fixes ====== */
+.gallery-card {
+    overflow: hidden; /* Hover zoom effect ko box ke andar rakhne ke liye */
+    border-radius: 8px; /* Smooth corners */
+}
+
+.gallery-img {
+    width: 100%;
+    height: 350px; /* Sabhi images ki height yahan fix ho jayegi */
+    object-fit: cover; /* Ye image ko stretch hone se rokega aur perfectly crop kar dega */
+    transition: transform 0.4s ease; /* Smooth hover effect */
+}
+
+.gallery-card:hover .gallery-img {
+    transform: scale(1.08); /* Mouse le jane par premium zoom effect */
+}
+
+/* Mobile responsive ke liye height thodi kam kar dete hain */
+@media (max-width: 768px) {
+    .gallery-img {
+        height: 250px; 
+    }
+}

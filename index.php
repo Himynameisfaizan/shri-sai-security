@@ -41,90 +41,190 @@
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Security Team" class="img-fluid rounded shadow-lg">
+                <img src="assets/images/services/1.jpeg" alt="Security Team" class="img-fluid rounded shadow-lg">
             </div>
         </div>
     </div>
 </section>
 
 <!-- Services Section -->
-<section class="section-padding bg-dark-blue text-light">
+<section class="section-padding bg-light-gray">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title text-white">What We <span>Offer Here</span></h2>
-            <p class="text-white-50">Comprehensive security and housekeeping solutions for every need.</p>
+            <h2 class="section-title">What We <span>Offer Here</span></h2>
+            <p class="text-muted">Comprehensive security and housekeeping solutions for every need.</p>
         </div>
         <div class="row g-4">
-            <!-- Service 1 -->
+            
+            <!-- Service 1: Corporate Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card text-dark">
-                    <i class="fas fa-building service-icon"></i>
-                    <h4>Corporate Security</h4>
-                    <p class="text-muted mt-3">Specialized security guard services for corporate offices, IT parks, and MNCs.</p>
+                <div class="service-card">
+                    <img src="assets/images/services/7.jpeg" alt="Corporate Security" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-building service-icon"></i>
+                            <h4 class="service-title">Corporate Security</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Specialized security guard services for corporate offices, IT parks, and MNCs ensuring a safe work environment.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="assets/images/services/8.jpeg" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Service 2 -->
+
+            <!-- Service 2: Industrial Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card text-dark">
-                    <i class="fas fa-industry service-icon"></i>
-                    <h4>Industrial Security</h4>
-                    <p class="text-muted mt-3">Robust security for manufacturing units, warehouses, and godowns.</p>
+                <div class="service-card">
+                    <img src="assets/images/services/8.jpeg" alt="Industrial Security" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-industry service-icon"></i>
+                            <h4 class="service-title">Industrial Security</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Robust security solutions specifically designed for manufacturing units, warehouses, and industrial godowns.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Industrial%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Service 3 -->
+
+            <!-- Service 3: Educational Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card text-dark">
-                    <i class="fas fa-graduation-cap service-icon"></i>
-                    <h4>Educational Security</h4>
-                    <p class="text-muted mt-3">Safe environment for schools, colleges, and university campuses.</p>
+                <div class="service-card">
+                    <img src="assets/images/services/9.jpeg" alt="Educational Security" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-graduation-cap service-icon"></i>
+                            <h4 class="service-title">Educational Security</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Maintaining a safe and secure environment for schools, colleges, and large university campuses.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Educational%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Service 4 -->
+
+            <!-- Service 4: Commercial Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card text-dark">
-                    <i class="fas fa-store service-icon"></i>
-                    <h4>Commercial Security</h4>
-                    <p class="text-muted mt-3">Vigilant guards for jewellery shops, supermarkets, and showrooms.</p>
+                <div class="service-card">
+                    <img src="assets/images/services/10.jpeg" alt="Commercial Security" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-store service-icon"></i>
+                            <h4 class="service-title">Commercial Security</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Highly vigilant guards tailored for jewellery shops, supermarkets, shopping malls, and showrooms.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Commercial%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Service 5 -->
+
+            <!-- Service 5: Residential Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card text-dark">
-                    <i class="fas fa-home service-icon"></i>
-                    <h4>Residential Security</h4>
-                    <p class="text-muted mt-3">Round-the-clock security for apartments, independent houses, and bungalows.</p>
+                <div class="service-card">
+                    <img src="assets/images/services/11.jpeg" alt="Residential Security" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-home service-icon"></i>
+                            <h4 class="service-title">Residential Security</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Round-the-clock protection and access control for apartments, independent houses, and bungalows.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Residential%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Service 6 -->
+
+            <!-- Service 6: Housekeeping Service -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-card text-dark">
-                    <i class="fas fa-broom service-icon"></i>
-                    <h4>Housekeeping Service</h4>
-                    <p class="text-muted mt-3">Professional cleaning and facility management services for all sectors.</p>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Housekeeping Service" class="service-img">
+                    <div class="service-content">
+                        <div class="service-icon-box">
+                            <i class="fas fa-broom service-icon"></i>
+                            <h4 class="service-title">Housekeeping Service</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Professional cleaning, sanitization, and facility management services for both corporate and residential sectors.</p>
+                        
+                        <div class="service-footer">
+                            <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Housekeeping%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="text-center mt-5">
-             <a href="#" class="btn btn-primary-custom">View All 20+ Services</a>
+             <a href="#" class="btn btn-primary-custom">Explore All Services</a>
         </div>
     </div>
 </section>
 
 <!-- Gallery Section -->
-<section class="section-padding">
+<section class="section-padding bg-light-gray">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="section-title">Our Gallery <span>Photo</span></h2>
+            <p class="text-muted">Glimpses of our professional security personnel on duty.</p>
         </div>
+        
         <div class="row g-4">
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
+            <!-- Image 1 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/1.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
+            <!-- Image 2 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/2.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
+            <!-- Image 3 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/3.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
         </div>
+
         <div class="row g-4 py-4">
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-sm" alt="Gallery"></div>
+            <!-- Image 4 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/4.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
+            <!-- Image 5 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/5.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
+            <!-- Image 6 -->
+            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="gallery-card shadow-sm">
+                    <img src="assets/images/services/6.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                </div>
+            </div>
         </div>
     </div>
 </section>

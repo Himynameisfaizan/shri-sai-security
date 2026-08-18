@@ -4,7 +4,7 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="d-flex align-items-center mb-4">
-                        <i class="fas fa-shield-alt text-primary-custom fs-2 me-2"></i>
+                        <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
                         <h4 class="text-white mb-0">Sri Sai Security</h4>
                     </div>
                     <p class="mb-4">Providing verified, secured, and top-tier security and housekeeping services to safeguard your assets and ensure peace of mind.</p>

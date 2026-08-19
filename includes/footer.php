@@ -4,8 +4,11 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="d-flex align-items-center mb-4">
-                        <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
-                        <h4 class="text-white mb-0">Sri Sai Security</h4>
+                        <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%;">
+                         <div>
+                    <span class="d-block fs-4 text-white">Sri Sai</span>
+                    <span class="d-block fs-6 text-white fw-normal">Security Services</span>
+                </div>
                     </div>
                     <p class="mb-4">Providing verified, secured, and top-tier security and housekeeping services to safeguard your assets and ensure peace of mind.</p>
                 </div>
@@ -20,7 +23,7 @@
                 
                 <div class="col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <h5>Quick Links</h5>
-                    <a href="#" class="footer-link">About Us</a>
+                    <a href="about.php" class="footer-link">About Us</a>
                     <a href="#" class="footer-link">Our Gallery</a>
                     <a href="#" class="footer-link">Client Reviews</a>
                     <a href="#" class="footer-link">Contact Us</a>

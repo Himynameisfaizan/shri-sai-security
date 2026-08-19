@@ -24,7 +24,7 @@
                 <h2 class="section-title">About <span>Our Company</span></h2>
                 <h5 class="mb-3 text-secondary">Sri Sai Security Services - Owned by Mr. R. Meen Barali</h5>
                 <p class="text-muted mb-4">We are a premier security agency based in Thiruvanmiyur, Chennai. We specialize in providing highly trained and professional security personnel for various sectors including corporate offices, industrial warehouses, educational institutes, and multispecialty hospitals.</p>
-                
+
                 <div class="row text-center mt-5">
                     <div class="col-4">
                         <h3 class="fw-bold text-dark">500+</h3>
@@ -55,7 +55,7 @@
             <p class="text-muted">Comprehensive security and housekeeping solutions for every need.</p>
         </div>
         <div class="row g-4">
-            
+
             <!-- Service 1: Corporate Security -->
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="service-card">
@@ -63,13 +63,16 @@
                     <div class="service-content">
                         <div class="service-icon-box">
                             <i class="fas fa-building service-icon"></i>
-                            <h4 class="service-title">Corporate Security</h4>
+                            <h4 class="service-title">Corporate <br> Security</h4>
                         </div>
                         <p class="text-muted small mb-4">Specialized security guard services for corporate offices, IT parks, and MNCs ensuring a safe work environment.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="assets/images/services/8.jpeg" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,10 +88,13 @@
                             <h4 class="service-title">Industrial Security</h4>
                         </div>
                         <p class="text-muted small mb-4">Robust security solutions specifically designed for manufacturing units, warehouses, and industrial godowns.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Industrial%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,10 +110,13 @@
                             <h4 class="service-title">Educational Security</h4>
                         </div>
                         <p class="text-muted small mb-4">Maintaining a safe and secure environment for schools, colleges, and large university campuses.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Educational%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,10 +132,13 @@
                             <h4 class="service-title">Commercial Security</h4>
                         </div>
                         <p class="text-muted small mb-4">Highly vigilant guards tailored for jewellery shops, supermarkets, shopping malls, and showrooms.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Commercial%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Commercial%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,10 +154,13 @@
                             <h4 class="service-title">Residential Security</h4>
                         </div>
                         <p class="text-muted small mb-4">Round-the-clock protection and access control for apartments, independent houses, and bungalows.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Residential%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -161,10 +176,13 @@
                             <h4 class="service-title">Housekeeping Service</h4>
                         </div>
                         <p class="text-muted small mb-4">Professional cleaning, sanitization, and facility management services for both corporate and residential sectors.</p>
-                        
+
                         <div class="service-footer">
                             <a href="service-details.php" class="read-more-link">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Housekeeping%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <div class="px-2 d-flex align-items-center gap-4 ">
+                                <a href="tel:+917200864976" target="_blank" class="phone-btn" title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
+                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Housekeeping%20Services." target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +190,7 @@
 
         </div>
         <div class="text-center mt-5">
-             <a href="#" class="btn btn-primary-custom">Explore All Services</a>
+            <a href="#" class="btn btn-primary-custom">Explore All Services</a>
         </div>
     </div>
 </section>
@@ -184,24 +202,30 @@
             <h2 class="section-title">Our Gallery <span>Photo</span></h2>
             <p class="text-muted">Glimpses of our professional security personnel on duty.</p>
         </div>
-        
+
         <div class="row g-4">
             <!-- Image 1 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/1.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                     <a href="assets/images/services/1.jpeg" class="glightbox">
+            <img src="assets/images/services/1.jpeg" class="img-fluid gallery-img" alt="Gallery">
+        </a>
                 </div>
             </div>
             <!-- Image 2 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/2.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    <a href="assets/images/services/2.jpeg" class="glightbox">
+                        <img src="assets/images/services/2.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    </a>
                 </div>
             </div>
             <!-- Image 3 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/3.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    <a href="assets/images/services/3.jpeg" class="glightbox">
+                        <img src="assets/images/services/3.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    </a>
                 </div>
             </div>
         </div>
@@ -210,19 +234,97 @@
             <!-- Image 4 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/4.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    <a href="assets/images/services/4.jpeg" class="glightbox">
+                        <img src="assets/images/services/4.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    </a>
                 </div>
             </div>
             <!-- Image 5 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/5.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    <a href="assets/images/services/5.jpeg" class="glightbox">
+                        <img src="assets/images/services/5.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    </a>
                 </div>
             </div>
             <!-- Image 6 -->
             <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
                 <div class="gallery-card shadow-sm">
-                    <img src="assets/images/services/6.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    <a href="assets/images/services/6.jpeg" class="glightbox">
+                        <img src="assets/images/services/6.jpeg" class="img-fluid gallery-img" alt="Gallery">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial / Client Review Section -->
+<section class="testimonial-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title text-white">Client <span>Reviews</span></h2>
+            <p class="text-white-50">See what our clients have to say about our security services.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+                <!-- Bootstrap Carousel -->
+                <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
+                    
+                    <!-- Indicators/Dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                    </div>
+
+                    <!-- Carousel Items -->
+                    <div class="carousel-inner">
+                        
+                        <!-- Review 1 -->
+                        <div class="carousel-item active" data-bs-interval="4000">
+                            <div class="testimonial-card">
+                                <i class="fas fa-quote-left quote-icon-large"></i>
+                                <p class="client-feedback">"Sri Sai Security Services has completely transformed the security layout of our corporate office. Their guards are highly professional, punctual, and very well-trained. The management is also very responsive to any ad-hoc requests."</p>
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client Image" class="client-img">
+                                <h4 class="client-name">Karthik Rajan</h4>
+                                <p class="client-role">HR Manager, TechCorp IT Park</p>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <div class="testimonial-card">
+                                <i class="fas fa-quote-left quote-icon-large"></i>
+                                <p class="client-feedback">"We hired them for our apartment complex security and housekeeping. The peace of mind they provide is unmatched. The 24/7 patrol and verified guards give our residents a true sense of safety."</p>
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client Image" class="client-img">
+                                <h4 class="client-name">Priya Sundaram</h4>
+                                <p class="client-role">Secretary, Greenfield Apartments</p>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <div class="testimonial-card">
+                                <i class="fas fa-quote-left quote-icon-large"></i>
+                                <p class="client-feedback">"Securing a manufacturing unit is tough, but Mr. R. Meen Barali's team handles it perfectly. From gate access control to material inward/outward checking, their processes are strict and reliable. Highly recommended!"</p>
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client Image" class="client-img">
+                                <h4 class="client-name">Suresh Menon</h4>
+                                <p class="client-role">Plant Head, Chennai Manufacturing Ltd.</p>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,7 +339,7 @@
             <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-right">
                 <h2 class="section-title">Why <span>Choose Us</span></h2>
                 <p class="text-muted mb-5">We bring trust and professional expertise directly to your premises, ensuring comprehensive protection.</p>
-                
+
                 <div class="d-flex mb-4">
                     <div class="bg-white rounded-circle shadow-sm p-3 me-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
                         <i class="fas fa-check-circle fs-3 text-primary-custom"></i>
@@ -266,7 +368,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Right Form Card -->
             <div class="col-lg-7" data-aos="fade-left">
                 <div class="quote-card p-4 p-md-5">

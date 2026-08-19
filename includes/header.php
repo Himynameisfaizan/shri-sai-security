@@ -13,6 +13,19 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/include.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+
+
+    <link rel="stylesheet" href="https://jsdelivr.net" />
+
+    <script src="https://jsdelivr.net"></script>
+<script>
+    const lightbox = GLightbox({
+        selector: '.glightbox'
+    });
+</script>
+
 </head>
 <body>
 
@@ -32,10 +45,10 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-1">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.php">
-               <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
+               <img src="assets/images/logo/logo.jpg" alt="Sri Sai Security Logo" class="me-3" style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%;">
                 <div>
                     <span class="d-block fs-4 text-dark">Sri Sai</span>
                     <span class="d-block fs-6 text-muted fw-normal">Security Services</span>
@@ -47,11 +60,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Clients</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="clients.php">Clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
                 </ul>
                 <a href="#quote" class="btn btn-primary-custom"><i class="fas fa-headset me-2"></i> Get a Quote</a>
             </div>

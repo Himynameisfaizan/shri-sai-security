@@ -88,7 +88,7 @@ body {
 .hero-section {
     background: linear-gradient(rgba(11, 21, 40, 0.322), rgba(11, 21, 40, 0.363)), url('https://plus.unsplash.com/premium_photo-1682125945563-8ce7517b8d17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2VjdXJpdHklMjBndWFyZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
     background-size: cover;
-    height: 85vh;
+    padding: 5rem 0;
     display: flex;
     align-items: center;
 }
@@ -249,7 +249,7 @@ body {
 
 .service-icon-box {
     display: flex;
-    align-items: center;
+    align-items: start;
     margin-bottom: 15px;
 }
 
@@ -302,6 +302,17 @@ body {
     transform: scale(1.1);
 }   
 
+.phone-btn {
+    color: #25D366; /* Official WhatsApp Color */
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.phone-btn:hover {
+    color: #128C7E;
+    transform: scale(1.1);
+}   
+
 /* GALLERY SECTION STYLING */
 
 /* ====== Gallery Section Fixes ====== */
@@ -326,4 +337,90 @@ body {
     .gallery-img {
         height: 250px; 
     }
+}
+
+/* ============================ */
+/* CLIENT TESTIMONIALS STYLING */
+/* ============================ */
+
+/* ====== Testimonial / Client Review Section ====== */
+.testimonial-section {
+    /* Dark Navy Blue gradient overlay with a corporate background image */
+    background: linear-gradient(rgba(10, 28, 58, 0.9), rgba(10, 28, 58, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Smooth Parallax Effect */
+    color: #fff;
+    position: relative;
+    padding: 100px 0;
+}
+
+.testimonial-card {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.quote-icon-large {
+    font-size: 55px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.client-feedback {
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+}
+
+.client-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    margin: 0 auto 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.client-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.client-role {
+    font-size: 0.9rem;
+    color: #adb5bd;
+    margin-bottom: 15px;
+}
+
+.rating-stars {
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+/* Customizing Bootstrap Carousel Dots */
+.testimonial-carousel .carousel-indicators {
+    bottom: -50px;
+}
+
+.testimonial-carousel .carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.5;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+}
+
+.testimonial-carousel .carousel-indicators .active {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transform: scale(1.3);
 }

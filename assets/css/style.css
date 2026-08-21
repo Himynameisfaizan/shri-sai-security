@@ -84,6 +84,66 @@ body {
     color: var(--primary-color) !important;
 }
 
+/* ====== Navbar Active Link Styling ====== */
+.navbar-nav .nav-link {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Active Class & Hover par text color change */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Bottom Border Animation for Active Link */
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    width: 80%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* ====== Google Translate Customization ====== */
+#google_translate_element {
+    margin-left: 15px;
+}
+
+/* Dropdown Styling */
+.goog-te-combo {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Hide Google Translate Top Banner & Logo */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+body {
+    top: 0px !important;
+}
+
+.goog-logo-link {
+    display: none !important;
+}
+
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0px;
+    /* Hides "Powered by Google" text to keep top bar clean */
+}
+
 /* Hero Section (Fixed Background) */
 .hero-section {
     background: linear-gradient(rgba(11, 21, 40, 0.322), rgba(11, 21, 40, 0.363)), url('https://plus.unsplash.com/premium_photo-1682125945563-8ce7517b8d17?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2VjdXJpdHklMjBndWFyZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center;
@@ -218,10 +278,11 @@ body {
 .service-card {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
     height: 100%;
-    overflow: hidden; /* Ensure image fits well inside rounded corners */
+    overflow: hidden;
+    /* Ensure image fits well inside rounded corners */
     border-bottom: 4px solid transparent;
     display: flex;
     flex-direction: column;
@@ -230,7 +291,7 @@ body {
 .service-card:hover {
     transform: translateY(-8px);
     border-bottom: 4px solid var(--primary-color);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
 .service-img {
@@ -292,7 +353,8 @@ body {
 }
 
 .whatsapp-btn {
-    color: #25D366; /* Official WhatsApp Color */
+    color: #25D366;
+    /* Official WhatsApp Color */
     font-size: 1.8rem;
     transition: 0.3s;
 }
@@ -300,10 +362,11 @@ body {
 .whatsapp-btn:hover {
     color: #128C7E;
     transform: scale(1.1);
-}   
+}
 
 .phone-btn {
-    color: #25D366; /* Official WhatsApp Color */
+    color: #25D366;
+    /* Official WhatsApp Color */
     font-size: 1.5rem;
     transition: 0.3s;
 }
@@ -311,31 +374,37 @@ body {
 .phone-btn:hover {
     color: #128C7E;
     transform: scale(1.1);
-}   
+}
 
 /* GALLERY SECTION STYLING */
 
 /* ====== Gallery Section Fixes ====== */
 .gallery-card {
-    overflow: hidden; /* Hover zoom effect ko box ke andar rakhne ke liye */
-    border-radius: 8px; /* Smooth corners */
+    overflow: hidden;
+    /* Hover zoom effect ko box ke andar rakhne ke liye */
+    border-radius: 8px;
+    /* Smooth corners */
 }
 
 .gallery-img {
     width: 100%;
-    height: 350px; /* Sabhi images ki height yahan fix ho jayegi */
-    object-fit: cover; /* Ye image ko stretch hone se rokega aur perfectly crop kar dega */
-    transition: transform 0.4s ease; /* Smooth hover effect */
+    height: 350px;
+    /* Sabhi images ki height yahan fix ho jayegi */
+    object-fit: cover;
+    /* Ye image ko stretch hone se rokega aur perfectly crop kar dega */
+    transition: transform 0.4s ease;
+    /* Smooth hover effect */
 }
 
 .gallery-card:hover .gallery-img {
-    transform: scale(1.08); /* Mouse le jane par premium zoom effect */
+    transform: scale(1.08);
+    /* Mouse le jane par premium zoom effect */
 }
 
 /* Mobile responsive ke liye height thodi kam kar dete hain */
 @media (max-width: 768px) {
     .gallery-img {
-        height: 250px; 
+        height: 250px;
     }
 }
 
@@ -348,7 +417,8 @@ body {
     /* Dark Navy Blue gradient overlay with a corporate background image */
     background: linear-gradient(rgba(10, 28, 58, 0.9), rgba(10, 28, 58, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
     background-size: cover;
-    background-attachment: fixed; /* Smooth Parallax Effect */
+    background-attachment: fixed;
+    /* Smooth Parallax Effect */
     color: #fff;
     position: relative;
     padding: 100px 0;
@@ -383,7 +453,7 @@ body {
     border-radius: 50%;
     border: 3px solid var(--primary-color);
     margin: 0 auto 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .client-name {

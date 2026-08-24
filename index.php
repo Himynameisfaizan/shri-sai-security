@@ -1,4 +1,15 @@
-<?php include 'includes/header.php'; ?>
+<?php
+include 'includes/header.php';
+include 'admin/db-conn.php';
+$contact_query = mysqli_query($conn, "SELECT phone, wp_number FROM contacts LIMIT 1");
+$contact_data = mysqli_fetch_assoc($contact_query);
+
+$phone_number = !empty($contact_data['phone']) ? $contact_data['phone'] : '917200864976';
+$wp_number = !empty($contact_data['wp_number']) ? $contact_data['wp_number'] : '917200864976';
+
+$services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LIMIT 6");
+
+?>
 
 <!-- Hero Section -->
 <section class="hero-section text-light">
@@ -61,177 +72,66 @@
         </div>
         <div class="row g-4">
 
-            <!-- Service 1: Corporate Security -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card">
-                    <img src="assets/images/services/7.jpeg" alt="Corporate Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-building service-icon"></i>
-                            <h4 class="service-title">Corporate <br> Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Specialized security guard services for corporate offices, IT
-                            parks, and MNCs ensuring a safe work environment.</p>
+            <?php
+            if (mysqli_num_rows($services_query) > 0) {
+                $delay = 100;
+                while ($service = mysqli_fetch_assoc($services_query)) {
+                    // Dynamic image path setup (admin upload folder ke according adjust karein)
+                    $img_src = !empty($service['img_path']) ? 'admin/assets/img/uploads/' . $service['img_path'] : 'assets/images/services/default.jpeg';
+                    $service_title = htmlspecialchars($service['service_name']);
+                    $short_desc = htmlspecialchars($service['short_desc']);
+                    $whatsapp_msg = urlencode("Hello, I am interested in your " . $service['service_name'] . ".");
+                    ?>
+                    <!-- Service Item -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
+                        <div class="service-card">
+                            <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img">
+                            <div class="service-content">
+                                <div class="service-icon-box">
+                                    <i class="fas fa-shield-alt service-icon"></i>
+                                    <h4 class="service-title"><?= $service_title; ?></h4>
+                                </div>
+                                <p class="text-muted small mb-4"><?= $short_desc; ?></p>
 
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
+                                <div class="service-footer">
+                                    <a href="service-details.php?id=<?= $service['id']; ?>" class="read-more-link">
+                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                    <div class="px-2 d-flex align-items-center gap-4">
+                                        <a href="tel:<?= $phone_number; ?>" target="_blank" class="phone-btn" title="Call Now">
+                                            <i class="fas fa-phone"></i>
+                                        </a>
+                                        <a href="https://wa.me/<?= $wp_number; ?>?text=<?= $whatsapp_msg; ?>" target="_blank"
+                                            class="whatsapp-btn" title="Chat on WhatsApp">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <?php
+                    $delay += 100; // Animation delay ko har card ke sath increment karna
+                }
+            } else {
+                ?>
+                <div class="col-12 text-center">
+                    <p class="text-muted">No services found.</p>
                 </div>
-            </div>
-
-            <!-- Service 2: Industrial Security -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card">
-                    <img src="assets/images/services/8.jpeg" alt="Industrial Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-industry service-icon"></i>
-                            <h4 class="service-title">Industrial Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Robust security solutions specifically designed for
-                            manufacturing units, warehouses, and industrial godowns.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3: Educational Security -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card">
-                    <img src="assets/images/services/9.jpeg" alt="Educational Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-graduation-cap service-icon"></i>
-                            <h4 class="service-title">Educational Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Maintaining a safe and secure environment for schools,
-                            colleges, and large university campuses.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 4: Commercial Security -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card">
-                    <img src="assets/images/services/10.jpeg" alt="Commercial Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-store service-icon"></i>
-                            <h4 class="service-title">Commercial Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Highly vigilant guards tailored for jewellery shops,
-                            supermarkets, shopping malls, and showrooms.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Commercial%20Security%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5: Residential Security -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card">
-                    <img src="assets/images/services/11.jpeg" alt="Residential Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-home service-icon"></i>
-                            <h4 class="service-title">Residential Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Round-the-clock protection and access control for apartments,
-                            independent houses, and bungalows.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Corporate%20Security%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6: Housekeeping Service -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Housekeeping Service" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-broom service-icon"></i>
-                            <h4 class="service-title">Housekeeping Service</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Professional cleaning, sanitization, and facility management
-                            services for both corporate and residential sectors.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <div class="px-2 d-flex align-items-center gap-4 ">
-                                <a href="tel:+917200864976" target="_blank" class="phone-btn"
-                                    title="Chat on WhatsApp"><i class="fas fa-phone"></i></a>
-                                <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20your%20Housekeeping%20Services."
-                                    target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                        class="fab fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
 
         </div>
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-primary-custom">Explore All Services</a>
+            <a href="services.php" class="btn btn-primary-custom">Explore All Services</a>
         </div>
     </div>
 </section>
 
 <!-- Gallery Section -->
+<?php
+$gallery_query = mysqli_query($conn, "SELECT * FROM gallery ORDER BY ID DESC LIMIT 6");
+?>
+
 <section class="section-padding bg-light-gray">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -240,62 +140,62 @@
         </div>
 
         <div class="row g-4">
-            <!-- Image 1 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/1.jpeg" class="glightbox">
-                        <img src="assets/images/services/1.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
-                </div>
-            </div>
-            <!-- Image 2 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/2.jpeg" class="glightbox">
-                        <img src="assets/images/services/2.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
-                </div>
-            </div>
-            <!-- Image 3 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/3.jpeg" class="glightbox">
-                        <img src="assets/images/services/3.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
-                </div>
-            </div>
-        </div>
+            <?php
+            if (mysqli_num_rows($gallery_query) > 0) {
+                $delay = 100;
+                while ($gallery = mysqli_fetch_assoc($gallery_query)) {
 
-        <div class="row g-4 py-4">
-            <!-- Image 4 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/4.jpeg" class="glightbox">
-                        <img src="assets/images/services/4.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
+                    // Image Path Handling
+                    $raw_path = $gallery['image_path'];
+                    if (strpos($raw_path, 'admin/') === 0) {
+                        $img_src = $raw_path;
+                    } elseif (strpos($raw_path, 'uploads/') === 0) {
+                        $img_src = 'admin/' . $raw_path;
+                    } else {
+                        $img_src = 'admin/uploads/gallery/' . $raw_path;
+                    }
+
+                    $image_title = !empty($gallery['image_name']) ? htmlspecialchars($gallery['image_name']) : 'Security Service Gallery';
+                    ?>
+                    <!-- Gallery Item -->
+                    <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="<?= $delay; ?>">
+                        <div class="gallery-card shadow-sm">
+                            <!-- data-gallery="security-gallery" se sabhi images ek slider group me jud jati hain -->
+                            <a href="<?= $img_src; ?>" class="glightbox" data-gallery="security-gallery"
+                                data-title="<?= $image_title; ?>">
+                                <img src="<?= $img_src; ?>" class="img-fluid gallery-img" alt="<?= $image_title; ?>"
+                                    loading="lazy">
+                                <div class="gallery-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                    $delay = ($delay >= 300) ? 100 : $delay + 100;
+                }
+            } else {
+                ?>
+                <div class="col-12 text-center">
+                    <p class="text-muted">No gallery photos available at the moment.</p>
                 </div>
-            </div>
-            <!-- Image 5 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/5.jpeg" class="glightbox">
-                        <img src="assets/images/services/5.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
-                </div>
-            </div>
-            <!-- Image 6 -->
-            <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
-                <div class="gallery-card shadow-sm">
-                    <a href="assets/images/services/6.jpeg" class="glightbox">
-                        <img src="assets/images/services/6.jpeg" class="img-fluid gallery-img" alt="Gallery">
-                    </a>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>
 
 <!-- Testimonial / Client Review Section -->
+<?php
+// Testimonials fetch karne ki query
+$testimonials_query = mysqli_query($conn, "SELECT * FROM testimonials ORDER BY display_order ASC, id DESC");
+$testimonials = [];
+if ($testimonials_query && mysqli_num_rows($testimonials_query) > 0) {
+    while ($row = mysqli_fetch_assoc($testimonials_query)) {
+        $testimonials[] = $row;
+    }
+}
+?>
+
 <section class="testimonial-section">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -305,78 +205,85 @@
 
         <div class="row">
             <div class="col-12" data-aos="fade-up" data-aos-delay="200">
-                <!-- Bootstrap Carousel -->
-                <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
+                <?php if (!empty($testimonials)): ?>
+                    <!-- Bootstrap Carousel -->
+                    <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
 
-                    <!-- Indicators/Dots -->
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0"
-                            class="active"></button>
-                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                        <!-- Indicators/Dots -->
+                        <div class="carousel-indicators">
+                            <?php foreach ($testimonials as $index => $item): ?>
+                                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="<?= $index; ?>"
+                                    class="<?= $index === 0 ? 'active' : ''; ?>"
+                                    aria-current="<?= $index === 0 ? 'true' : 'false'; ?>"
+                                    aria-label="Slide <?= $index + 1; ?>">
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <!-- Carousel Items -->
+                        <div class="carousel-inner">
+                            <?php foreach ($testimonials as $index => $item):
+                                // Client image path handling
+                                $photo = $item['client_photo'];
+                                if (!empty($photo)) {
+                                    if (strpos($photo, 'admin/') === 0) {
+                                        $img_src = $photo;
+                                    } elseif (strpos($photo, 'uploads/') === 0) {
+                                        $img_src = 'admin/' . $photo;
+                                    } else {
+                                        $img_src = 'admin/uploads/testimonials/' . $photo;
+                                    }
+                                } else {
+                                    // Default profile avatar agar photo upload na ho
+                                    $img_src = 'https://ui-avatars.com/api/?name=' . urlencode($item['client_name']) . '&background=random&color=fff';
+                                }
+
+                                // Role & Company formatting
+                                $role_parts = array_filter([$item['client_title'], $item['client_company']]);
+                                $role_text = implode(', ', $role_parts);
+
+                                // Rating stars (1 to 5)
+                                $rating = !empty($item['rating']) ? (int) $item['rating'] : 5;
+                                ?>
+                                <!-- Review Item -->
+                                <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>" data-bs-interval="4000">
+                                    <div class="testimonial-card">
+                                        <i class="fas fa-quote-left quote-icon-large"></i>
+
+                                        <p class="client-feedback">
+                                            <?= htmlspecialchars(trim($item['testimonial_text'], '" ')); ?>
+                                        </p>
+
+                                        <img src="<?= $img_src; ?>" alt="<?= htmlspecialchars($item['client_name']); ?>"
+                                            class="client-img">
+
+                                        <h4 class="client-name"><?= htmlspecialchars($item['client_name']); ?></h4>
+
+                                        <?php if (!empty($role_text)): ?>
+                                            <p class="client-role"><?= htmlspecialchars($role_text); ?></p>
+                                        <?php endif; ?>
+
+                                        <!-- Rating Stars -->
+                                        <div class="rating-stars">
+                                            <?php for ($s = 1; $s <= 5; $s++): ?>
+                                                <?php if ($s <= $rating): ?>
+                                                    <i class="fas fa-star"></i>
+                                                <?php else: ?>
+                                                    <i class="far fa-star"></i>
+                                                <?php endif; ?>
+                                            <?php endfor; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
                     </div>
-
-                    <!-- Carousel Items -->
-                    <div class="carousel-inner">
-
-                        <!-- Review 1 -->
-                        <div class="carousel-item active" data-bs-interval="4000">
-                            <div class="testimonial-card">
-                                <i class="fas fa-quote-left quote-icon-large"></i>
-                                <p class="client-feedback">"Sri Sai Security Services has completely transformed the
-                                    security layout of our corporate office. Their guards are highly professional,
-                                    punctual, and very well-trained. The management is also very responsive to any
-                                    ad-hoc requests."</p>
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                                    alt="Client Image" class="client-img">
-                                <h4 class="client-name">Karthik Rajan</h4>
-                                <p class="client-role">HR Manager, TechCorp IT Park</p>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 2 -->
-                        <div class="carousel-item" data-bs-interval="4000">
-                            <div class="testimonial-card">
-                                <i class="fas fa-quote-left quote-icon-large"></i>
-                                <p class="client-feedback">"We hired them for our apartment complex security and
-                                    housekeeping. The peace of mind they provide is unmatched. The 24/7 patrol and
-                                    verified guards give our residents a true sense of safety."</p>
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                                    alt="Client Image" class="client-img">
-                                <h4 class="client-name">Priya Sundaram</h4>
-                                <p class="client-role">Secretary, Greenfield Apartments</p>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Review 3 -->
-                        <div class="carousel-item" data-bs-interval="4000">
-                            <div class="testimonial-card">
-                                <i class="fas fa-quote-left quote-icon-large"></i>
-                                <p class="client-feedback">"Securing a manufacturing unit is tough, but Mr. R. Meen
-                                    Barali's team handles it perfectly. From gate access control to material
-                                    inward/outward checking, their processes are strict and reliable. Highly
-                                    recommended!"</p>
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                                    alt="Client Image" class="client-img">
-                                <h4 class="client-name">Suresh Menon</h4>
-                                <p class="client-role">Plant Head, Chennai Manufacturing Ltd.</p>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-
+                <?php else: ?>
+                    <div class="text-center text-white-50">
+                        <p>No reviews available yet.</p>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -465,55 +372,77 @@
 </section>
 
 <!-- Blog / Recent News Section -->
+<?php
+// Published blogs ko fetch karne ki query (Latest 3 posts)
+$blogs_query = mysqli_query($conn, "SELECT * FROM blogs WHERE status = 'published' ORDER BY id DESC LIMIT 3");
+?>
+
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <h2 class="section-title">Recent <span>News & Blog</span></h2>
             <p class="text-muted">Stay updated with our latest security insights and company news.</p>
         </div>
+
         <div class="row g-4">
-            <!-- Blog 1 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="blog-card border">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <h5 class="fw-bold mb-3">Importance of CCTV in Corporate Security</h5>
-                        <p class="text-muted small mb-4">Learn why integrating CCTV systems with on-ground security
-                            guards provides maximum protection...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
+            <?php
+            if ($blogs_query && mysqli_num_rows($blogs_query) > 0) {
+                $delay = 100;
+                while ($blog = mysqli_fetch_assoc($blogs_query)) {
+
+                    // Image path handling
+                    $raw_img = $blog['image'];
+                    if (!empty($raw_img)) {
+                        if (strpos($raw_img, 'admin/') === 0) {
+                            $img_src = $raw_img;
+                        } elseif (strpos($raw_img, 'uploads/') === 0) {
+                            $img_src = 'admin/' . $raw_img;
+                        } else {
+                            $img_src = 'admin/assets/img/uploads/' . $raw_img;
+                        }
+                    } else {
+                        // Fallback image agar DB me image null ho
+                        $img_src = 'assets/images/blog/default.jpg';
+                    }
+
+                    // Content se plain text snippet create karna (HTML tags remove karke)
+                    $clean_text = strip_tags($blog['content']);
+                    $short_desc = (strlen($clean_text) > 110) ? substr($clean_text, 0, 110) . '...' : $clean_text;
+
+                    // Detail page link (Slug ya ID ke through)
+                    $blog_link = !empty($blog['slug_url']) ? 'blog-details.php?slug=' . urlencode($blog['slug_url']) : 'blog-details.php?id=' . $blog['id'];
+                    $blog_title = htmlspecialchars($blog['title']);
+                    ?>
+                    <!-- Blog Card Item -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
+                        <div class="blog-card border h-100 d-flex flex-column">
+                            <a href="<?= $blog_link; ?>" class="d-block overflow-hidden">
+                                <img src="<?= $img_src; ?>" alt="<?= $blog_title; ?>" class="blog-image w-100" loading="lazy">
+                            </a>
+                            <div class="blog-content d-flex flex-column flex-grow-1">
+                                <h5 class="fw-bold mb-3">
+                                    <a href="<?= $blog_link; ?>" class="text-dark text-decoration-none">
+                                        <?= $blog_title; ?>
+                                    </a>
+                                </h5>
+                                <p class="text-muted small mb-4 flex-grow-1"><?= $short_desc; ?></p>
+                                <div class="mt-auto">
+                                    <a href="<?= $blog_link; ?>" class="text-primary-custom fw-bold text-decoration-none">
+                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <?php
+                    $delay += 100;
+                }
+            } else {
+                ?>
+                <div class="col-12 text-center">
+                    <p class="text-muted">No recent news or blogs available right now.</p>
                 </div>
-            </div>
-            <!-- Blog 2 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="blog-card border">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <h5 class="fw-bold mb-3">Best Housekeeping Practices for Offices</h5>
-                        <p class="text-muted small mb-4">A clean environment boosts productivity. Discover our top
-                            strategies for maintaining spotless workspaces...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Blog 3 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="blog-card border">
-                    <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <h5 class="fw-bold mb-3">How We Train Our Industrial Guards</h5>
-                        <p class="text-muted small mb-4">Industrial sectors face unique threats. See how Sri Sai
-                            Security prepares guards for tough environments...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>

@@ -1,9 +1,35 @@
 <?php
+include "admin/db-conn.php";
 $pageTitle = "Our Services";
 include("includes/header.php");
-include("includes/breadcrumb.php")
-    ?>
+include("includes/breadcrumb.php");
 
+$contact_query = mysqli_query($conn, "SELECT phone, wp_number FROM contacts LIMIT 1");
+$contact_data = mysqli_fetch_assoc($contact_query);
+$phone_number = !empty($contact_data['phone']) ? $contact_data['phone'] : '917200864976'; //[cite: 1]
+$wp_number = !empty($contact_data['wp_number']) ? $contact_data['wp_number'] : '917200864976'; //[cite: 1]
+
+$limit = 6;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+if ($page < 1) {
+    $page = 1;
+}
+
+$total_records_query = mysqli_query($conn, "SELECT COUNT(id) AS total FROM services");
+$total_records_data = mysqli_fetch_assoc($total_records_query);
+$total_records = $total_records_data['total'];
+$total_pages = ceil($total_records / $limit);
+
+// Agar user total pages se bada number URL me pass kare
+if ($page > $total_pages && $total_pages > 0) {
+    $page = $total_pages;
+}
+
+$offset = ($page - 1) * $limit;
+
+// 3. Current page ki services fetch karna
+$services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LIMIT $offset, $limit");
+?>
 
 <!-- Services Grid Section -->
 <section class="section-padding bg-light-gray">
@@ -15,225 +41,99 @@ include("includes/breadcrumb.php")
         </div>
 
         <div class="row g-4">
+            <?php
+            if ($services_query && mysqli_num_rows($services_query) > 0) {
+                $delay = 100;
+                while ($service = mysqli_fetch_assoc($services_query)) {
 
-            <!-- Service 1: Corporate & Office -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Corporate Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-building service-icon"></i>
-                            <h4 class="service-title">Corporate & Office Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Professional guards for corporate offices, IT parks, and MNCs
-                            ensuring access control and safe working environments.</p>
+                    // Image Path Handling
+                    $raw_img = $service['img_path'];
+                    if (!empty($raw_img)) {
+                        if (strpos($raw_img, 'admin/') === 0) {
+                            $img_src = $raw_img;
+                        } elseif (strpos($raw_img, 'uploads/') === 0) {
+                            $img_src = 'admin/' . $raw_img;
+                        } else {
+                            $img_src = 'admin/assets/img/uploads/' . $raw_img;
+                        }
+                    } else {
+                        $img_src = 'assets/images/services/default.jpeg';
+                    }
 
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Corporate%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    $service_title = htmlspecialchars($service['service_name']);
+                    $short_desc = htmlspecialchars($service['short_desc']);
+                    $whatsapp_msg = urlencode("Hello, I am interested in your " . $service['service_name'] . ".");
+                    $details_link = "service-details.php?id=" . $service['id'];
+                    ?>
+                    <!-- Service Card Item -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
+                        <div class="service-card h-100 d-flex flex-column">
+                            <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img" loading="lazy">
+                            <div class="service-content d-flex flex-column flex-grow-1">
+                                <div class="service-icon-box">
+                                    <i class="fas fa-shield-alt service-icon"></i>
+                                    <h4 class="service-title"><?= $service_title; ?></h4>
+                                </div>
+                                <p class="text-muted small mb-4 flex-grow-1"><?= $short_desc; ?></p>
 
-            <!-- Service 2: Industrial -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Industrial Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-industry service-icon"></i>
-                            <h4 class="service-title">Industrial Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Robust security solutions designed specifically for
-                            manufacturing units, heavy industries, and factory premises.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Industrial%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3: Educational -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Educational Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-graduation-cap service-icon"></i>
-                            <h4 class="service-title">Educational Institutes</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Vigilant safety protocols for schools, colleges, and university
-                            campuses to protect students and staff.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Educational%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
+                                <div class="service-footer mt-auto">
+                                    <a href="<?= $details_link; ?>" class="read-more-link">
+                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                    <a href="https://wa.me/<?= $wp_number; ?>?text=<?= $whatsapp_msg; ?>" target="_blank"
+                                        class="whatsapp-btn" title="Chat on WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <?php
+                    $delay = ($delay >= 300) ? 100 : $delay + 100;
+                }
+            } else {
+                ?>
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">No services found.</p>
                 </div>
-            </div>
-
-            <!-- Service 4: Commercial & Retail -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Commercial Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-store service-icon"></i>
-                            <h4 class="service-title">Commercial & Retail Shops</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Specialized protection for high-value retail such as jewellery
-                            shops, garments showrooms, and supermarkets.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Commercial%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5: Residential -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Residential Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-home service-icon"></i>
-                            <h4 class="service-title">Residential Security</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Round-the-clock monitoring and strict visitor management for
-                            apartments and independent houses.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Residential%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6: Warehouse & Courier -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Warehouse Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-boxes service-icon"></i>
-                            <h4 class="service-title">Warehouse & Godown</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Prevent inventory theft with our strict security checks at
-                            logistics centers, godowns, and courier warehouses.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Warehouse%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 7: Hospitals & Labs -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Hospital Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-hospital service-icon"></i>
-                            <h4 class="service-title">Healthcare & Hospitals</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Patient and staff safety management for multispecialty
-                            hospitals, clinics, pharma labs, and research institutes.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Hospital%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 8: Farmhouse & Bungalow -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Farmhouse Security" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-tree service-icon"></i>
-                            <h4 class="service-title">Farmhouse & Bungalows</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Exclusive guarding services for large private estates,
-                            farmhouses, and luxury bungalows ensuring maximum privacy.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Farmhouse%20Security%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 9: Housekeeping -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Housekeeping Service" class="service-img">
-                    <div class="service-content">
-                        <div class="service-icon-box">
-                            <i class="fas fa-broom service-icon"></i>
-                            <h4 class="service-title">Housekeeping Services</h4>
-                        </div>
-                        <p class="text-muted small mb-4">Complete facility management, deep cleaning, and sanitization
-                            services provided by a highly trained workforce.</p>
-
-                        <div class="service-footer">
-                            <a href="service-details.php" class="read-more-link">Read More <i
-                                    class="fas fa-arrow-right ms-1"></i></a>
-                            <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20Housekeeping%20Services."
-                                target="_blank" class="whatsapp-btn" title="Chat on WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <?php } ?>
         </div>
+
+        <!-- Bootstrap 5 Pagination -->
+        <?php if ($total_pages > 1): ?>
+            <div class="row mt-5" data-aos="fade-up">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+
+                            <!-- Previous Page Link -->
+                            <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="?page=<?= $page - 1; ?>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <!-- Page Numbers -->
+                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <li class="page-item <?= ($page == $i) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
+
+                            <!-- Next Page Link -->
+                            <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="?page=<?= $page + 1; ?>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        <?php endif; ?>
+
     </div>
 </section>
 
-<?php include("includes/footer.php") ?>
+<?php include("includes/footer.php"); ?>

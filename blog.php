@@ -1,7 +1,31 @@
 <?php
+include "admin/db-conn.php";
 $pageTitle = "Our Blog & News";
 include 'includes/header.php';
 include 'includes/breadcrumb.php';
+
+// Pagination Configuration
+$limit = 6; // Ek page par 6 blogs show honge
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+if ($page < 1) {
+    $page = 1;
+}
+
+// Total published blogs count karna
+$total_records_query = mysqli_query($conn, "SELECT COUNT(id) AS total FROM blogs WHERE status = 'published'"); //
+$total_records_data = mysqli_fetch_assoc($total_records_query);
+$total_records = $total_records_data['total'];
+$total_pages = ceil($total_records / $limit);
+
+// Agar url me page number total pages se jyada ho jaye
+if ($page > $total_pages && $total_pages > 0) {
+    $page = $total_pages;
+}
+
+$offset = ($page - 1) * $limit;
+
+// Current page ke hisaab se blogs fetch karna
+$blogs_query = mysqli_query($conn, "SELECT * FROM blogs WHERE status = 'published' ORDER BY created_at DESC LIMIT $offset, $limit"); //
 ?>
 
 <section class="section-padding bg-light-gray">
@@ -12,81 +36,104 @@ include 'includes/breadcrumb.php';
         </div>
 
         <div class="row g-4">
+            <?php
+            if ($blogs_query && mysqli_num_rows($blogs_query) > 0) {
+                $delay = 100;
+                while ($blog = mysqli_fetch_assoc($blogs_query)) {
 
-            <!-- Blog Card 1 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="blog-card border-0">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar-alt"></i> Aug 12, 2026</span>
-                            <span><i class="fas fa-folder"></i> Corporate</span>
+                    // Image path handling
+                    $raw_img = $blog['image']; //[cite: 1]
+                    if (!empty($raw_img)) {
+                        if (strpos($raw_img, 'admin/') === 0) {
+                            $img_src = $raw_img;
+                        } elseif (strpos($raw_img, 'uploads/') === 0) {
+                            $img_src = 'admin/' . $raw_img;
+                        } else {
+                            $img_src = 'admin/assets/img/uploads/' . $raw_img;
+                        }
+                    } else {
+                        $img_src = 'assets/images/blog/default.jpg'; // Fallback image
+                    }
+
+                    // Content snippet create karna
+                    // htmlspecialchars_decode aur stripslashes se raw HTML handle hoga aur strip_tags tags remove karega
+                    $clean_text = strip_tags(htmlspecialchars_decode(stripslashes($blog['content']))); //[cite: 1]
+                    $short_desc = (strlen($clean_text) > 110) ? substr($clean_text, 0, 110) . '...' : $clean_text;
+
+                    // Title aur Date formatting
+                    $blog_title = htmlspecialchars($blog['title']); //[cite: 1]
+                    $blog_date = date('M d, Y', strtotime($blog['created_at'])); //[cite: 1]
+                    $author = !empty($blog['author']) ? htmlspecialchars($blog['author']) : 'Admin'; //[cite: 1]
+            
+                    // Blog detail page link
+                    $blog_link = !empty($blog['slug_url']) ? 'blog-details.php?slug=' . urlencode($blog['slug_url']) : 'blog-details.php?id=' . $blog['id']; //[cite: 1]
+                    ?>
+                    <!-- Blog Card -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
+                        <div class="blog-card border-0 h-100 d-flex flex-column shadow-sm">
+                            <a href="<?= $blog_link; ?>" class="d-block overflow-hidden">
+                                <img src="<?= $img_src; ?>" alt="<?= $blog_title; ?>" class="blog-image w-100"
+                                    style="object-fit: cover; height: 250px;">
+                            </a>
+                            <div class="blog-content d-flex flex-column flex-grow-1 bg-white p-4">
+                                <div class="blog-meta mb-3 text-muted small d-flex gap-3">
+                                    <span><i class="fas fa-calendar-alt text-primary-custom"></i> <?= $blog_date; ?></span>
+                                    <span><i class="fas fa-user text-primary-custom"></i> <?= $author; ?></span>
+                                </div>
+                                <h5 class="fw-bold mb-3">
+                                    <a href="<?= $blog_link; ?>" class="text-dark text-decoration-none"><?= $blog_title; ?></a>
+                                </h5>
+                                <p class="text-muted small mb-4 flex-grow-1"><?= $short_desc; ?></p>
+                                <div class="mt-auto">
+                                    <a href="<?= $blog_link; ?>" class="text-primary-custom fw-bold text-decoration-none">
+                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <h5 class="fw-bold mb-3">Importance of CCTV in Corporate Security</h5>
-                        <p class="text-muted small mb-4">Learn why integrating CCTV systems with on-ground security
-                            guards provides maximum protection...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
                     </div>
+                    <?php
+                    $delay = ($delay >= 300) ? 100 : $delay + 100;
+                }
+            } else {
+                ?>
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">No blogs published yet. Check back later!</p>
                 </div>
-            </div>
-
-            <!-- Blog Card 2 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="blog-card border-0">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar-alt"></i> Aug 05, 2026</span>
-                            <span><i class="fas fa-folder"></i> Housekeeping</span>
-                        </div>
-                        <h5 class="fw-bold mb-3">Best Housekeeping Practices for Offices</h5>
-                        <p class="text-muted small mb-4">A clean environment boosts productivity. Discover our top
-                            strategies for maintaining spotless workspaces...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Card 3 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="blog-card border-0">
-                    <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Blog Image" class="blog-image">
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="fas fa-calendar-alt"></i> Jul 28, 2026</span>
-                            <span><i class="fas fa-folder"></i> Training</span>
-                        </div>
-                        <h5 class="fw-bold mb-3">How We Train Our Industrial Guards</h5>
-                        <p class="text-muted small mb-4">Industrial sectors face unique threats. See how Sri Sai
-                            Security prepares guards for tough environments...</p>
-                        <a href="blog-details.php" class="text-primary-custom fw-bold text-decoration-none">Read More <i
-                                class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- More cards can go here for a 6-card grid... I'm skipping duplicating them for brevity, you can copy-paste the structure above -->
-
+            <?php } ?>
         </div>
 
         <!-- Pagination -->
-        <div class="row mt-5" data-aos="fade-up">
-            <div class="col-12">
-                <ul class="pagination pagination-custom justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#"><i class="fas fa-angle-left"></i>
-                            Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next <i class="fas fa-angle-right"></i></a></li>
-                </ul>
+        <?php if ($total_pages > 1): ?>
+            <div class="row mt-5" data-aos="fade-up">
+                <div class="col-12">
+                    <ul class="pagination pagination-custom justify-content-center">
+
+                        <!-- Previous Button -->
+                        <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                            <a class="page-link" href="<?= ($page <= 1) ? '#' : '?page=' . ($page - 1); ?>">
+                                <i class="fas fa-angle-left"></i> Prev
+                            </a>
+                        </li>
+
+                        <!-- Page Numbers -->
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?= ($page == $i) ? 'active' : ''; ?>">
+                                <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <!-- Next Button -->
+                        <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                            <a class="page-link" href="<?= ($page >= $total_pages) ? '#' : '?page=' . ($page + 1); ?>">
+                                Next <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
 
     </div>
 </section>

@@ -18,6 +18,7 @@ $footer_contact = mysqli_fetch_assoc($footer_contact_query);
 $f_name = !empty($footer_contact['name']) ? htmlspecialchars($footer_contact['name']) : 'Mr. R. Meen Barali';
 $f_address = !empty($footer_contact['address']) ? htmlspecialchars($footer_contact['address']) : 'No.2, M.G. Road, Thiruvanmiyur, Chennai - 600041';
 $f_phone = !empty($footer_contact['phone']) ? htmlspecialchars($footer_contact['phone']) : '+91 72008 64976';
+$wp_number = !empty($footer_contact['wp_number']) ? htmlspecialchars($footer_contact['wp_number']) : '+91 72008 64976';
 $f_email = !empty($footer_contact['email']) ? htmlspecialchars($footer_contact['email']) : 'srisaiss505@gmail.com';
 
 // Map URL Setup (Ensure it's an embed link)
@@ -55,11 +56,11 @@ $current_year = date("Y");
                 <?php
                 if ($footer_services_query && mysqli_num_rows($footer_services_query) > 0) {
                     while ($f_service = mysqli_fetch_assoc($footer_services_query)) {
-                        ?>
+                ?>
                         <a href="service-details.php?id=<?= $f_service['id']; ?>" class="footer-link">
                             <?= htmlspecialchars($f_service['service_name']); ?>
                         </a>
-                        <?php
+                    <?php
                     }
                 } else {
                     ?>
@@ -110,6 +111,107 @@ $current_year = date("Y");
     </div>
 </footer>
 
+<!-- ==============================================
+     FLOATING WHATSAPP & CALL BUTTONS
+=============================================== -->
+<div class="floating-contact-wrap">
+    <!-- Dynamic Call Button -->
+    <a href="tel:<?= $f_phone; ?>" class="float-btn phone-float-btn" title="Call Us Now">
+        <i class="fas fa-phone-alt"></i>
+    </a>
+
+    <!-- Dynamic WhatsApp Button -->
+    <a href="https://wa.me/<?= $wp_number; ?>?text=Hello,%20I%20am%20looking%20for%20Security%20Services." target="_blank" class="float-btn wp-float-btn" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<!-- Floating Buttons Styling -->
+<style>
+    .floating-contact-wrap {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 9999;
+    }
+
+    .float-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 30px;
+        text-decoration: none;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .float-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        color: white;
+    }
+
+    /* Phone Button Style */
+    .phone-float-btn {
+        background-color: #0d6efd;
+        /* Theme Primary Color */
+    }
+
+    .phone-float-btn:hover {
+        background-color: #0b5ed7;
+        box-shadow: 0px 6px 15px rgba(13, 110, 253, 0.5);
+    }
+
+    /* WhatsApp Button Style with Pulse Animation */
+    .wp-float-btn {
+        background-color: #25D366;
+        /* Official WhatsApp Green */
+        animation: pulse-animation 2s infinite;
+    }
+
+    .wp-float-btn:hover {
+        background-color: #1ebe57;
+        animation: none;
+        box-shadow: 0px 6px 15px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Cool Pulse Animation */
+    @keyframes pulse-animation {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
+
+    /* Responsive for smaller screens */
+    @media (max-width: 768px) {
+        .floating-contact-wrap {
+            bottom: 20px;
+            right: 20px;
+            gap: 10px;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+    }
+</style>
+
 <!-- Bootstrap 5 JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- AOS Animation JS -->
@@ -137,17 +239,6 @@ $current_year = date("Y");
     });
 </script>
 
-<!-- GALLERY SECTION IN INDEX PAGE GLightbox JS -->
-
-<script>
-    const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        zoomable: true,
-        autoplayVideos: true
-    });
-</script>
 </body>
 
 </html>

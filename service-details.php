@@ -114,7 +114,7 @@ include 'includes/breadcrumb.php';
                         <h4 class="fw-bold mb-3">Need Any Help?</h4>
                         <p class="text-white-50 mb-4">Contact our expert team to get a customized security plan for your
                             premises.</p>
-                        <h5 class="text-primary-custom fw-bold mb-4"><i class="fas fa-phone-alt me-2"></i> +91 72008 64976
+                        <h5 class="text-primary-custom fw-bold mb-4"><i class="fas fa-phone-alt me-2"></i> <a class="text-primary-custom fw-bold mb-4" style="text-decoration: none;" href="tel:+917200864976">+91 72008 64976</a>
                         </h5>
                         <a href="https://wa.me/917200864976?text=Hello,%20I%20am%20interested%20in%20<?php echo urlencode($service['service_name']); ?>"
                             target="_blank" class="btn btn-primary-custom w-100">Chat on WhatsApp</a>

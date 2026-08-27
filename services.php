@@ -64,15 +64,19 @@ $services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LI
                     $short_desc = htmlspecialchars($service['short_desc']);
                     $whatsapp_msg = urlencode("Hello, I am interested in your " . $service['service_name'] . ".");
                     $details_link = "service-details.php?id=" . $service['id'];
-                    ?>
+            ?>
                     <!-- Service Card Item -->
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
                         <div class="service-card h-100 d-flex flex-column">
-                            <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img" loading="lazy">
+                            <a href="<?= $details_link; ?>" class="read-more-link">
+                                <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img" loading="lazy">
+                            </a>
                             <div class="service-content d-flex flex-column flex-grow-1">
                                 <div class="service-icon-box">
                                     <i class="fas fa-shield-alt service-icon"></i>
-                                    <h4 class="service-title"><?= $service_title; ?></h4>
+                                    <a href="<?= $details_link; ?>" class="read-more-link">
+                                        <h4 class="service-title"><?= $service_title; ?></h4>
+                                    </a>
                                 </div>
                                 <p class="text-muted small mb-4 flex-grow-1"><?= $short_desc; ?></p>
 
@@ -88,7 +92,7 @@ $services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LI
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                     $delay = ($delay >= 300) ? 100 : $delay + 100;
                 }
             } else {

@@ -21,16 +21,6 @@
     <link rel="stylesheet" href="assets/css/services.css">
     <link rel="stylesheet" href="assets/css/blog.css">
 
-
-    <link rel="stylesheet" href="https://jsdelivr.net" />
-
-    <script src="https://jsdelivr.net"></script>
-    <script>
-        const lightbox = GLightbox({
-            selector: '.glightbox'
-        });
-    </script>
-
 </head>
 
 <body>
@@ -41,8 +31,8 @@
             <div class="row align-items-center">
                 <!-- Contact Info -->
                 <div class="col-md-7">
-                    <span class="me-4"><i class="fas fa-phone-alt text-primary-custom me-2"></i> +91 7200864976</span>
-                    <span><i class="fas fa-envelope text-primary-custom me-2"></i> srisaiss505@gmail.com</span>
+                    <span class="me-4"><i class="fas fa-phone-alt text-primary-custom me-2"></i><a style="color:white; text-decoration:none;" href="tel:+917200864976"> +91 7200864976</a></span>
+                    <span><i class="fas fa-envelope text-primary-custom me-2"></i><a style="color:white; text-decoration:none;" href="mailto:srisaiss505@gmail.com"> srisaiss505@gmail.com</a></span>
                 </div>
                 <!-- Address & Translate Dropdown -->
                 <div class="col-md-5 d-flex justify-content-end align-items-center">
@@ -100,7 +90,7 @@
                             href="contact.php">Contact Us</a>
                     </li>
                 </ul>
-                <a href="#quote" class="btn btn-primary-custom"><i class="fas fa-headset me-2"></i> Get a Quote</a>
+                <a href="contact.php" class="btn btn-primary-custom"><i class="fas fa-headset me-2"></i> Get a Quote</a>
             </div>
         </div>
     </nav>

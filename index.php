@@ -81,15 +81,18 @@ $services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LI
                     $service_title = htmlspecialchars($service['service_name']);
                     $short_desc = htmlspecialchars($service['short_desc']);
                     $whatsapp_msg = urlencode("Hello, I am interested in your " . $service['service_name'] . ".");
-                    ?>
+            ?>
                     <!-- Service Item -->
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
                         <div class="service-card">
-                            <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img">
+                            <a href="service-details.php?id=<?= $service['id']; ?>">
+                                <img src="<?= $img_src; ?>" alt="<?= $service_title; ?>" class="service-img"></a>
                             <div class="service-content">
                                 <div class="service-icon-box">
                                     <i class="fas fa-shield-alt service-icon"></i>
-                                    <h4 class="service-title"><?= $service_title; ?></h4>
+                                    <a href="service-details.php?id=<?= $service['id']; ?>" class="read-more-link">
+                                        <h4 class="service-title"><?= $service_title; ?></h4>
+                                    </a>
                                 </div>
                                 <p class="text-muted small mb-4"><?= $short_desc; ?></p>
 
@@ -110,7 +113,7 @@ $services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LI
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                     $delay += 100; // Animation delay ko har card ke sath increment karna
                 }
             } else {
@@ -156,7 +159,7 @@ $gallery_query = mysqli_query($conn, "SELECT * FROM gallery ORDER BY ID DESC LIM
                     }
 
                     $image_title = !empty($gallery['image_name']) ? htmlspecialchars($gallery['image_name']) : 'Security Service Gallery';
-                    ?>
+            ?>
                     <!-- Gallery Item -->
                     <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="<?= $delay; ?>">
                         <div class="gallery-card shadow-sm">
@@ -171,7 +174,7 @@ $gallery_query = mysqli_query($conn, "SELECT * FROM gallery ORDER BY ID DESC LIM
                             </a>
                         </div>
                     </div>
-                    <?php
+                <?php
                     $delay = ($delay >= 300) ? 100 : $delay + 100;
                 }
             } else {
@@ -181,6 +184,54 @@ $gallery_query = mysqli_query($conn, "SELECT * FROM gallery ORDER BY ID DESC LIM
                 </div>
             <?php } ?>
         </div>
+    </div>
+</section>
+
+<section class="section-padding bg-light-gray">
+    <div class="container">
+
+        <!-- Section Heading Added -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Our Core <span>Principles</span></h2>
+            <p class="text-muted">The foundation of our commitment to your safety, security, and peace of mind.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Mission Card -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="vision-card">
+                    <div class="vision-icon-wrapper">
+                        <i class="fas fa-bullseye vision-icon"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3 text-white">Our Mission</h3>
+                    <p class="text-light opacity-75 mb-0">To deliver uncompromised security solutions through continuous training, strict verification processes, and leveraging modern security protocols to ensure complete client satisfaction.</p>
+                </div>
+            </div>
+
+            <!-- Vision Card -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <!-- Center card highlighted with a slightly different primary dark color -->
+                <div class="vision-card active-card">
+                    <div class="vision-icon-wrapper">
+                        <i class="fas fa-eye vision-icon"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3 text-white">Our Vision</h3>
+                    <p class="text-light opacity-75 mb-0">To be recognized as the most trusted and reliable security agency in Tamil Nadu, setting industry benchmarks for excellence, integrity, and proactive risk management.</p>
+                </div>
+            </div>
+
+            <!-- Value Card -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="vision-card">
+                    <div class="vision-icon-wrapper">
+                        <i class="fas fa-gem vision-icon"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3 text-white">Our Values</h3>
+                    <p class="text-light opacity-75 mb-0">Integrity, vigilance, and helpfulness are the core pillars of our agency. We operate with absolute transparency and treat our clients' safety as our highest personal responsibility.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -244,7 +295,7 @@ if ($testimonials_query && mysqli_num_rows($testimonials_query) > 0) {
 
                                 // Rating stars (1 to 5)
                                 $rating = !empty($item['rating']) ? (int) $item['rating'] : 5;
-                                ?>
+                            ?>
                                 <!-- Review Item -->
                                 <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>" data-bs-interval="4000">
                                     <div class="testimonial-card">
@@ -412,7 +463,7 @@ $blogs_query = mysqli_query($conn, "SELECT * FROM blogs WHERE status = 'publishe
                     // Detail page link (Slug ya ID ke through)
                     $blog_link = !empty($blog['slug_url']) ? 'blog-details.php?slug=' . urlencode($blog['slug_url']) : 'blog-details.php?id=' . $blog['id'];
                     $blog_title = htmlspecialchars($blog['title']);
-                    ?>
+            ?>
                     <!-- Blog Card Item -->
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?= $delay; ?>">
                         <div class="blog-card border h-100 d-flex flex-column">
@@ -434,7 +485,7 @@ $blogs_query = mysqli_query($conn, "SELECT * FROM blogs WHERE status = 'publishe
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                     $delay += 100;
                 }
             } else {

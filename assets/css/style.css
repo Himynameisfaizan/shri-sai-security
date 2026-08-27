@@ -534,3 +534,73 @@ body {
     opacity: 1;
     transform: scale(1.3);
 }
+
+/* Vision & Mission Cards Styling */
+.vision-card {
+    background-color: #1a2a47;
+    /* Dark Blue Theme */
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    height: 100%;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Hover Effect for standard cards */
+.vision-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(26, 42, 71, 0.2);
+}
+
+/* Highlighted Center Card (Active) */
+.vision-card.active-card {
+    background-color: #0d254b;
+    box-shadow: 0 15px 40px rgba(13, 37, 75, 0.3);
+    transform: scale(1.05);
+    /* Slightly larger for emphasis */
+}
+
+/* Responsive adjustment for the center card */
+@media (max-width: 991px) {
+    .vision-card.active-card {
+        transform: scale(1);
+    }
+
+    .vision-card.active-card:hover {
+        transform: translateY(-10px);
+    }
+}
+
+/* Icon Wrapper Styling */
+.vision-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px auto;
+    transition: all 0.4s ease;
+}
+
+/* Icon Size & Color */
+.vision-icon {
+    font-size: 35px;
+    color: #ff9800;
+    /* Primary accent color (e.g., Orange/Gold) */
+}
+
+/* Icon Hover Animation */
+.vision-card:hover .vision-icon-wrapper {
+    background: #ff9800;
+}
+
+.vision-card:hover .vision-icon {
+    color: #ffffff;
+    transform: scale(1.1);
+}

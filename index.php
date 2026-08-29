@@ -1,46 +1,94 @@
 <?php
 include 'includes/header.php';
 include 'admin/db-conn.php';
-$contact_query = mysqli_query($conn, "SELECT phone, wp_number FROM contacts LIMIT 1");
-$contact_data = mysqli_fetch_assoc($contact_query);
 
-$phone_number = !empty($contact_data['phone']) ? $contact_data['phone'] : '917200864976';
-$wp_number = !empty($contact_data['wp_number']) ? $contact_data['wp_number'] : '917200864976';
+// Banners fetch karne ki query (Order by display_order ya latest id)
+$banner_query = mysqli_query($conn, "SELECT banner_path, title, description, link_url FROM banners ORDER BY display_order ASC, id DESC");
+$banners = [];
 
-$services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LIMIT 6");
-
-?>
-
-<!-- Hero Section -->
-<?php
-// 1. Fetch Latest Banner from database
-$banner_query = mysqli_query($conn, "SELECT banner_path, title, description FROM banners ORDER BY id DESC LIMIT 1");
-$banner_data = mysqli_fetch_assoc($banner_query);
-
-// 2. Setup Image Path
-// Agar database me banner hai, to uska path banayenge, warna default image show karenge[cite: 1]
-if (!empty($banner_data['banner_path'])) {
-    $banner_img = 'admin/' . $banner_data['banner_path']; // Ensure path admin folder ko point kare
+if ($banner_query && mysqli_num_rows($banner_query) > 0) {
+    while ($row = mysqli_fetch_assoc($banner_query)) {
+        $banners[] = $row;
+    }
 } else {
-    $banner_img = 'assets/images/banner/1.jpeg'; // Fallback image
+    // Fallback banner agar DB me koi banner na ho
+    $banners[] = [
+        'banner_path' => 'assets/images/banner/1.jpeg',
+        'title' => 'Your Security, Our Priority',
+        'description' => 'Providing highly trained professionals for your safety.',
+        'link_url' => 'services.php'
+    ];
 }
-
-// 3. Dynamic Title & Subtitle (Optional, agar DB se dikhana ho)[cite: 1]
-$hero_title = !empty($banner_data['title']) ? htmlspecialchars($banner_data['title']) : "Your Security, Our Priority";
-$hero_desc = !empty($banner_data['description']) ? htmlspecialchars($banner_data['description']) : "Providing highly trained professionals for your safety.";
 ?>
-
-<!-- Hero Section HTML with Inline Dynamic Background -->
-<section class="hero-section" style="background: linear-gradient(rgba(11, 21, 40, 0.5), rgba(11, 21, 40, 0.7)), url('<?= $banner_img; ?>') no-repeat center center; background-size: cover;">
-    <div class="container text-center text-white">
-        <!-- Text content with AOS Animation -->
-        <h1 class="display-4 fw-bold mb-4" data-aos="fade-down"><?= $hero_title; ?></h1>
-        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200"><?= $hero_desc; ?></p>
+<!-- Hero Slider Section -->
+<section class="hero-slider-section p-0">
+    <!-- Slider Wrapper (Sirf data-bs- attributes) -->
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
         
-        <div data-aos="zoom-in" data-aos-delay="400">
-            <a href="services.php" class="btn btn-primary-custom btn-lg me-3">Explore Services</a>
-            <a href="contact.php" class="btn btn-outline-light btn-lg">Contact Us</a>
+        <!-- Indicators (Bottom Dots) -->
+        <div class="carousel-indicators" style="z-index: 15;">
+            <?php 
+            $i = 0;
+            foreach ($banners as $banner): ?>
+                <button type="button" 
+                        data-bs-target="#heroCarousel" 
+                        data-bs-slide-to="<?= $i; ?>" 
+                        class="<?= $i === 0 ? 'active' : ''; ?>" 
+                        aria-current="<?= $i === 0 ? 'true' : 'false'; ?>">
+                </button>
+            <?php 
+            $i++;
+            endforeach; ?>
         </div>
+
+        <!-- Slider Items -->
+        <div class="carousel-inner">
+            <?php 
+            $j = 0;
+            foreach ($banners as $banner): 
+                
+                // Image Path Setup[cite: 1]
+                $raw_path = $banner['banner_path'];
+                if (!empty($raw_path) && strpos($raw_path, 'assets/') === false) {
+                    $banner_img = (strpos($raw_path, 'admin/') === 0 || strpos($raw_path, 'uploads/') === 0) 
+                                  ? (strpos($raw_path, 'admin/') === 0 ? $raw_path : 'admin/' . $raw_path) 
+                                  : 'admin/uploads/banners/' . $raw_path;
+                } else {
+                    $banner_img = !empty($raw_path) ? $raw_path : 'assets/images/banner/1.jpeg';
+                }
+
+                $title = !empty($banner['title']) ? htmlspecialchars($banner['title']) : "Sri Sai Security Services";
+                $description = !empty($banner['description']) ? htmlspecialchars($banner['description']) : "";
+                $link = !empty($banner['link_url']) ? htmlspecialchars($banner['link_url']) : "services.php";
+            ?>
+                <!-- Single Slide -->
+                <div class="carousel-item <?= $j === 0 ? 'active' : ''; ?>">
+                    <div class="hero-slide-bg" style="background: linear-gradient(rgba(11, 21, 40, 0.6), rgba(11, 21, 40, 0.8)), url('<?= $banner_img; ?>') no-repeat center center; background-size: cover; width: 100%; min-height: 80vh; display: flex; align-items: center;">
+                        <div class="container text-center text-white" style="position: relative; z-index: 10;">
+                            <h1 class="display-4 fw-bold mb-4 slider-title"><?= $title; ?></h1>
+                            <p class="lead mb-5 slider-desc"><?= $description; ?></p>
+                            <div class="slider-btns">
+                                <a href="<?= $link; ?>" class="btn btn-primary-custom btn-lg me-3">Explore Now</a>
+                                <a href="contact.php" class="btn btn-outline-light btn-lg">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php 
+            $j++;
+            endforeach; ?>
+        </div>
+
+        <!-- Left/Right Arrows -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" style="z-index: 20; border: none; background: transparent;">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 3rem; height: 3rem; background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 20px;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" style="z-index: 20; border: none; background: transparent;">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 3rem; height: 3rem; background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 20px;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
     </div>
 </section>
 
@@ -512,5 +560,20 @@ $blogs_query = mysqli_query($conn, "SELECT * FROM blogs WHERE status = 'publishe
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var myCarousel = document.querySelector('#heroCarousel');
+        if(myCarousel) {
+            var carousel = new bootstrap.Carousel(myCarousel, { 
+                 interval: 5000, // 5 seconds me slide hoga
+                ride: 'carousel',
+                wrap: true  
+             });
+        }
+    });
+</script>
+
+
 
 <?php include 'includes/footer.php'; ?>

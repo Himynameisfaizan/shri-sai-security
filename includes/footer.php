@@ -126,7 +126,8 @@ $current_year = date("Y");
     </a>
 </div>
 
-<!-- Floating Buttons Styling -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
     .floating-contact-wrap {
         position: fixed;

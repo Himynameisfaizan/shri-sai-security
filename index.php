@@ -12,19 +12,34 @@ $services_query = mysqli_query($conn, "SELECT * FROM services ORDER BY id ASC LI
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section text-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8" data-aos="fade-up">
-                <h1 class="hero-title mb-4">WE PROVIDE <span class="text-primary-custom">VERIFIED</span> & SECURED
-                    SERVICE FOR COMPANY</h1>
-                <p class="lead mb-5">Professional security guard and housekeeping services tailored for corporates,
-                    industries, and residential sectors in Chennai.</p>
-                <div>
-                    <a href="about.php" class="btn btn-primary-custom me-3">Read More</a>
-                    <a href="contact.php" class="btn btn-outline-custom">Contact Us</a>
-                </div>
-            </div>
+<?php
+// 1. Fetch Latest Banner from database
+$banner_query = mysqli_query($conn, "SELECT banner_path, title, description FROM banners ORDER BY id DESC LIMIT 1");
+$banner_data = mysqli_fetch_assoc($banner_query);
+
+// 2. Setup Image Path
+// Agar database me banner hai, to uska path banayenge, warna default image show karenge[cite: 1]
+if (!empty($banner_data['banner_path'])) {
+    $banner_img = 'admin/' . $banner_data['banner_path']; // Ensure path admin folder ko point kare
+} else {
+    $banner_img = 'assets/images/banner/1.jpeg'; // Fallback image
+}
+
+// 3. Dynamic Title & Subtitle (Optional, agar DB se dikhana ho)[cite: 1]
+$hero_title = !empty($banner_data['title']) ? htmlspecialchars($banner_data['title']) : "Your Security, Our Priority";
+$hero_desc = !empty($banner_data['description']) ? htmlspecialchars($banner_data['description']) : "Providing highly trained professionals for your safety.";
+?>
+
+<!-- Hero Section HTML with Inline Dynamic Background -->
+<section class="hero-section" style="background: linear-gradient(rgba(11, 21, 40, 0.5), rgba(11, 21, 40, 0.7)), url('<?= $banner_img; ?>') no-repeat center center; background-size: cover;">
+    <div class="container text-center text-white">
+        <!-- Text content with AOS Animation -->
+        <h1 class="display-4 fw-bold mb-4" data-aos="fade-down"><?= $hero_title; ?></h1>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200"><?= $hero_desc; ?></p>
+        
+        <div data-aos="zoom-in" data-aos-delay="400">
+            <a href="services.php" class="btn btn-primary-custom btn-lg me-3">Explore Services</a>
+            <a href="contact.php" class="btn btn-outline-light btn-lg">Contact Us</a>
         </div>
     </div>
 </section>

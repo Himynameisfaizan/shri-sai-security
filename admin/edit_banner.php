@@ -70,16 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $end_date = $_POST['end_date'];
 
         // Validate  fields
+      // Validate fields
         if (empty($title)) {
-            $error = "Title is .";
+            $error = "Title is required.";
         } elseif (empty($link_url)) {
-            $error = "Link URL is .";
+            $error = "Link URL is required.";
         } elseif (!filter_var($link_url, FILTER_VALIDATE_URL)) {
             $error = "Please enter a valid URL.";
         } else {
-            // Check if a new file was uploaded
-            $new_banner_path = $banner['banner_path']; // Keep existing path by default
-
+            $new_banner_path = $banner['banner_path']; 
             if (!empty($_FILES['new_banner']['name'])) {
                 $target_dir = "uploads/banners/";
 
@@ -384,34 +383,47 @@ if (!$banner && $banner_id > 0) {
     </section>
 
     <script>
-        // Preview new banner before upload
-        function previewNewBanner(input) {
-            const previewContainer = document.getElementById('newBannerPreviewContainer');
-            const newPreview = document.getElementById('newBannerPreview');
+    // Preview new banner before upload
+    function previewNewBanner(input) {
+        const previewContainer = document.getElementById('newBannerPreviewContainer');
+        const newPreview = document.getElementById('newBannerPreview');
 
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    newPreview.src = e.target.result;
-                    previewContainer.style.display = 'block';
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewContainer.style.display = 'none';
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                newPreview.src = e.target.result;
+                previewContainer.style.display = 'block';
             }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewContainer.style.display = 'none';
         }
+    }
 
-        // Confirm before leaving page if changes were made
-        window.addEventListener('beforeunload', function (e) {
-            const fileInput = document.querySelector('input[type="file"]');
-            if (fileInput.files.length > 0) {
-                e.preventDefault();
-                e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
-            }
+    // Flag to check if form is being submitted
+    let isSubmitting = false;
+
+    // Jab form actually submit ho raha ho, tab popup mat dikhao
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function() {
+            isSubmitting = true;
         });
-    </script>
+    });
+
+    // Confirm before leaving page ONLY IF NOT SUBMITTING
+    window.addEventListener('beforeunload', function (e) {
+        if (isSubmitting) {
+            return undefined; // Form submit hone do
+        }
+        
+        const fileInput = document.querySelector('input[type="file"]');
+        if (fileInput && fileInput.files.length > 0) {
+            e.preventDefault();
+            e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+        }
+    });
+</script>
 </body>
 
 </html>

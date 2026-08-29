@@ -30,7 +30,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                     Content</span></a>
             <ul>
                 <li><a href="home-items.php">Add Logo</a></li>
-                <!-- <li><a href="add-banner.php">Add Banners</a></li> -->
+                <li><a href="add-banner.php">Add Banners</a></li>
             </ul>
         </li>
 

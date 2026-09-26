@@ -1,14 +1,14 @@
 <?php
+// Sabse pehle session start karein (Bina kisi HTML ya space ke)
+session_start();
 include "db-conn.php";
 
-// Check admin authentication
-// session_start();
+// Admin authentication check (Pehle commented tha, ab activate kar diya hai)
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    // header("Location: login.php");
-    // exit();
+    header("Location: login.php");
+    exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -498,7 +498,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                 const submitBtn = form.querySelector('button[type="submit"]');
                 const originalBtnText = submitBtn.innerHTML;
 
-                // Explicitly send action for PHP script (The Big Fix)
+                // Explicitly send action for PHP script
                 if (form.querySelector('[name="update-testimonial"]')) {
                     formData.append('action', 'update-testimonial');
                 } else {

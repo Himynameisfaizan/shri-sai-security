@@ -1,11 +1,20 @@
 <?php
-include "functions.php";
+session_start();
+// Include database connection directly
+include "db-conn.php"; 
 
-// Get testimonial id from URL
+// 1. Fetch testimonial id from URL & Get Data
 if (isset($_GET['edit']) && !empty($_GET['edit'])) {
-    $testimonial_id = $_GET['edit'];
-    // Fetch testimonial details from the database
-    $testimonial = get_testimonial_by_id($testimonial_id);
+    $testimonial_id = intval($_GET['edit']);
+    
+    // Direct Query instead of missing function
+    $stmt = $conn->prepare("SELECT * FROM testimonials WHERE id = ?");
+    $stmt->bind_param("i", $testimonial_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $testimonial = $result->fetch_assoc();
+    $stmt->close();
+
     if (!$testimonial) {
         echo "Testimonial not found.";
         exit;
@@ -15,18 +24,18 @@ if (isset($_GET['edit']) && !empty($_GET['edit'])) {
     exit;
 }
 
-// Process form submission for updating the testimonial
+// 2. Process form submission for updating the testimonial
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve updated values from POST
-    $client_name = $_POST['client_name'] ?? '';
-    $client_title = $_POST['client_title'] ?? '';
-    $client_company = $_POST['client_company'] ?? '';
-    $testimonial_text = $_POST['testimonial_text'] ?? '';
-    $rating = $_POST['rating'] ?? 0;
-    $project_name = $_POST['project_name'] ?? '';
-    $project_date = $_POST['project_date'] ?? '';
+    
+    $client_name = trim($_POST['client_name'] ?? '');
+    $client_title = trim($_POST['client_title'] ?? '');
+    $client_company = trim($_POST['client_company'] ?? '');
+    $testimonial_text = trim($_POST['testimonial_text'] ?? '');
+    $rating = isset($_POST['rating']) ? (int)$_POST['rating'] : 5;
+    $project_name = trim($_POST['project_name'] ?? '');
+    $project_date = !empty($_POST['project_date']) ? $_POST['project_date'] : NULL;
     $featured = isset($_POST['featured']) ? 1 : 0;
-    $display_order = $_POST['display_order'] ?? 0;
+    $display_order = isset($_POST['display_order']) ? (int)$_POST['display_order'] : 0;
     
     // Handle file upload
     $client_photo = $testimonial['client_photo']; // Keep existing photo by default
@@ -36,40 +45,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Create directory if it doesn't exist
         if (!file_exists($upload_dir)) {
-            mkdir($upload_dir, 0755, true); // Create with read/write permissions
+            mkdir($upload_dir, 0755, true); 
         }
         
-        $file_name = basename($_FILES['client_photo']['name']);
+        $file_name = time() . '_' . basename($_FILES['client_photo']['name']);
         $target_path = $upload_dir . $file_name;
         
         // Check if file is an image
         $imageFileType = strtolower(pathinfo($target_path, PATHINFO_EXTENSION));
-        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+        $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
         
         if (in_array($imageFileType, $allowed_types)) {
             if (move_uploaded_file($_FILES['client_photo']['tmp_name'], $target_path)) {
                 $client_photo = $file_name;
+                
                 // Delete old photo if it exists and is different
-                if (!empty($testimonial['client_photo']) && $testimonial['client_photo'] != $file_name) {
+                if (!empty($testimonial['client_photo']) && file_exists($upload_dir . $testimonial['client_photo'])) {
                     @unlink($upload_dir . $testimonial['client_photo']);
                 }
             } else {
                 $_SESSION['error'] = "Error uploading file.";
             }
         } else {
-            $_SESSION['error'] = "Invalid file type. Only JPG, JPEG, PNG & GIF files are allowed.";
+            $_SESSION['error'] = "Invalid file type. Only JPG, JPEG, PNG, WEBP & GIF files are allowed.";
         }
     }
     
-    // Update testimonial
-    if (update_testimonial($testimonial_id, $client_name, $client_title, $client_company, 
-                         $client_photo, $testimonial_text, $rating, $project_name, 
-                         $project_date, $featured, $display_order)) {
-        $_SESSION['success'] = "Testimonial updated successfully!";
-        header("Location: view-testimonials.php"); // redirect back after update
-        exit;
-    } else {
-        $_SESSION['error'] = "Error updating testimonial.";
+    // 3. Direct Update Query instead of missing update_testimonial()
+    if (!isset($_SESSION['error'])) {
+        $update_sql = "UPDATE testimonials SET client_name=?, client_title=?, client_company=?, client_photo=?, testimonial_text=?, rating=?, project_name=?, project_date=?, featured=?, display_order=? WHERE id=?";
+        
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("sssssissiii", $client_name, $client_title, $client_company, $client_photo, $testimonial_text, $rating, $project_name, $project_date, $featured, $display_order, $testimonial_id);
+        
+        if ($update_stmt->execute()) {
+            $_SESSION['success'] = "Testimonial updated successfully!";
+            header("Location: view-testimonials.php"); 
+            exit;
+        } else {
+            $_SESSION['error'] = "Error updating testimonial: " . $conn->error;
+        }
+        $update_stmt->close();
     }
 }
 ?>
@@ -94,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             max-width: 150px;
             max-height: 150px;
             margin-bottom: 10px;
+            border-radius: 8px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -124,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <div class="white_card_body">
                                 <div class="QA_section">
+                                    
                                     <?php if (isset($_SESSION['error'])): ?>
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
@@ -145,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="QA_table mb_30">
                                         <form action="" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="testimonial_id" value="<?= htmlspecialchars($testimonial['id']) ?>">
@@ -213,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                              class="preview-image d-block mb-2">
                                                     <?php endif; ?>
                                                     <input type="file" name="client_photo" class="form-control" accept="image/*">
-                                                    <small class="text-muted">Leave blank to keep existing photo</small>
+                                                    <small class="text-muted">Leave blank to keep existing photo. Allowed formats: JPG, PNG, WEBP.</small>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-check form-switch mt-4">
@@ -262,10 +282,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.querySelector('input[name="client_photo"]').addEventListener('change', function(e) {
             if (this.files && this.files[0]) {
                 const reader = new FileReader();
-                const preview = document.querySelector('.preview-image') || 
-                    document.createElement('img');
+                let preview = document.querySelector('.preview-image');
                 
-                if (!document.querySelector('.preview-image')) {
+                if (!preview) {
+                    preview = document.createElement('img');
                     preview.className = 'preview-image d-block mb-2';
                     this.parentNode.insertBefore(preview, this);
                 }
